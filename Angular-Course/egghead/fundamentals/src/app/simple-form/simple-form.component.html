@@ -1,0 +1,4 @@
+{{ msg }}
+<input #text type="text" [(ngModel)]="msg">
+<button (mouseover)="onClick($event, text.value)">Click</button>
+<br>

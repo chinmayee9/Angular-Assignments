@@ -1,0 +1,599 @@
+<div class="app" #root="$implicit" dir="ltr" [ngClass]="{'app-dark': dark, 'boxed': boxed, 'collapsed-sidebar': collapseSidebar, 'compact-sidebar': compactSidebar}">
+  <md-toolbar class="main-header" color="primary">
+    <!--<button (click)="sidemenu.toggle()" md-icon-button>
+      <md-icon>menu</md-icon>
+    </button>
+    <div class="branding">
+      <div class="logo"></div>
+    </div>
+    <div class="search-bar" fxFlex>
+      <form class="search-form" fxShow="false" fxShow.gt-xs>
+        <md-icon>search</md-icon>
+        <input type="text" placeholder="Search" autofocus="true" />
+      </form>
+    </div>
+    <button appToggleFullscreen md-icon-button>
+      <md-icon>fullscreen</md-icon>
+    </button>
+    <button (click)="end.toggle()" md-icon-button class="ml-xs overflow-visible">
+      <md-icon>notifications</md-icon>
+      <span class="notification-label">5</span>
+    </button>
+    <button [md-menu-trigger-for]="user" md-icon-button class="ml-xs">
+      <md-icon>person</md-icon>
+    </button>
+    <md-menu #user="mdMenu" x-position="before">
+      <button md-menu-item>
+        <md-icon>settings</md-icon>
+        Settings
+      </button>
+      <button md-menu-item>
+        <md-icon>account_box</md-icon>
+        Profile
+      </button>
+      <button md-menu-item>
+        <md-icon>notifications_off</md-icon>
+        Disable notifications
+      </button>
+      <button md-menu-item>
+        <md-icon>exit_to_app</md-icon>
+        Sign Out
+      </button>
+    </md-menu>-->
+  </md-toolbar>
+
+  <!--<md-sidenav-container class="app-inner">
+    <md-sidenav #sidemenu class="sidebar-panel" id="sidebar-panel" [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()" (mouseover)="menuMouseOver()" (mouseout)="menuMouseOut()">
+      <md-nav-list appAccordion class="navigation">
+        <md-list-item appAccordionLink *ngFor="let menuitem of menuItems.getAll()" group="{{menuitem.state}}">
+          <a appAccordionToggle class="relative" md-ripple [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
+            <md-icon>{{ menuitem.icon }}</md-icon>
+            <span>{{ menuitem.name | translate }}</span>
+            <span fxFlex></span>
+            <span class="menu-badge mat-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+          </a>
+          <a appAccordionToggle class="relative" md-ripple href="{{menuitem.state}}" *ngIf="menuitem.type === 'extLink'">
+            <md-icon>{{ menuitem.icon }}</md-icon>
+            <span>{{ menuitem.name | translate }}</span>
+            <span fxFlex></span>
+            <span class="menu-badge mat-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+          </a>
+          <a appAccordionToggle class="relative" md-ripple href="{{menuitem.state}}" target="_blank" *ngIf="menuitem.type === 'extTabLink'">
+            <md-icon>{{ menuitem.icon }}</md-icon>
+            <span>{{ menuitem.name | translate }}</span>
+            <span fxFlex></span>
+            <span class="menu-badge mat-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+          </a>
+          <a appAccordionToggle class="relative" md-ripple href="javascript:;" *ngIf="menuitem.type === 'sub'">
+            <md-icon>{{ menuitem.icon }}</md-icon>
+            <span>{{ menuitem.name | translate }}</span>
+            <span fxFlex></span>
+            <span class="menu-badge mat-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+            <md-icon class="menu-caret">arrow_drop_down</md-icon>
+          </a>
+          <md-nav-list class="sub-menu" *ngIf="menuitem.type === 'sub'">
+            <md-list-item *ngFor="let childitem of menuitem.children" routerLinkActive="open">
+              <a [routerLink]="['/', menuitem.state, childitem.state ]" class="relative" md-ripple>{{ childitem.name | translate }}</a>
+            </md-list-item>
+          </md-nav-list>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item>
+          <a (click)="addMenuItem()">
+            <md-icon>add</md-icon>
+            <span>Add</span>
+          </a>
+        </md-list-item>
+      </md-nav-list>
+    </md-sidenav>
+    <md-sidenav #end align="end" class="chat-panel" mode="over" opened="false">
+      <md-tab-group [selectedIndex]="1" md-stretch-tabs>
+        <md-tab>
+          <ng-template md-tab-label>Today</ng-template>
+          <div class="scroll">
+            <md-list class="pt-1 pb-1">
+              <md-list-item>
+                <div fxLayout="column">
+                  <h2 class="ma-0">{{ today | date:'EEEE' }}</h2>
+                  <h6 class="mat-text-muted ma-0"><span>{{ today | date:'dd' }}</span>&nbsp;<span>{{ today | date:'MMMM' }}</span></h6>
+                </div>
+              </md-list-item>
+            </md-list>
+            <md-nav-list>
+              <md-divider></md-divider>
+              <h3 md-subheader class="text-uppercase font-weight-bold">Stocks</h3>
+              <md-list-item>
+                 <a md-line href="javascript:;">NASDAQ</a>
+                 <span class="mat-text-muted text-md mr-xs ml-xs">4,492.87</span>
+                 <span>-0.29%</span>
+              </md-list-item>
+              <md-list-item>
+                 <a md-line href="javascript:;">NYSE</a>
+                 <span class="mat-text-muted text-md mr-xs ml-xs">10,692.07</span>
+                 <span>-0.53%</span>
+              </md-list-item>
+              <md-list-item>
+                 <a md-line href=javascript:;>DOW J</a>
+                 <span class="mat-text-muted text-md mr-xs ml-xs">17,046.81</span>
+                 <span>-0.14%</span>
+              </md-list-item>
+              <md-list-item>
+                 <a md-line href="javascript:;">APPL</a>
+                 <span class="mat-text-muted text-md mr-xs ml-xs">100,89</span>
+                 <span>+0.75%</span>
+              </md-list-item>
+              <md-divider></md-divider>
+              <h3 md-subheader class="text-uppercase font-weight-bold">Weather</h3>
+              <md-list-item>
+                 <a md-line href="javascript:;">{{ today | date:'shortTime' }}</a>
+                 <p md-line class="mat-text-muted">London</p>
+                 <span class="h4 pe-is-w-blizzard mr-1"></span>
+                 <span class="h4">26°</span>
+              </md-list-item>
+              <md-divider></md-divider>
+              <h3 md-subheader class="text-uppercase font-weight-bold">Todo</h3>
+              <md-list-item>
+                <a md-line href="javascript:;">Learn Angular 2.0</a>
+                <p md-line class="mat-text-muted text-md">2:45PM</p>
+              </md-list-item>
+              <md-list-item>
+                 <a md-line href="javascript:;">Learn Angular Material</a>
+                 <p md-line class="mat-text-muted text-md">3:20PM</p>
+              </md-list-item>
+              <md-list-item>
+                 <a md-line href="javascript:;">Write documentation</a>
+                 <p md-line class="mat-text-muted text-md">6:00PM</p>
+              </md-list-item>
+              <md-divider class="mt-xs mb-xs"></md-divider>
+              <h3 md-subheader class="text-uppercase font-weight-bold">Stats</h3>
+              <md-list-item>
+                <p class="text-md" md-line>Local Storage (4023 / 10690)</p>
+                <md-progress-bar  md-line mode="determinate" color="warn" value="40"></md-progress-bar>
+              </md-list-item>
+              <md-list-item>
+                <p class="text-md" md-line>Cloud Storage (700 / 1030)</p>
+                <md-progress-bar  md-line mode="determinate" color="accent" value="70"></md-progress-bar>
+              </md-list-item>
+              <md-list-item>
+                <p class="text-md" md-line>Local Storage (20 / 100)</p>
+                <md-progress-bar  md-line mode="determinate" value="20"></md-progress-bar>
+              </md-list-item>
+            </md-nav-list>
+          </div>
+        </md-tab>
+        <md-tab>
+          <ng-template md-tab-label>Notifications</ng-template>
+          <div class="scroll">
+            <md-nav-list>
+              <md-list-item>
+                <md-icon md-list-avatar class="mat-text-primary">people</md-icon>
+                <h4 md-line>Social</h4>
+                <p md-line>Ligula Purus Adipiscing</p>
+              </md-list-item>
+              <md-list-item>
+                <md-icon md-list-avatar class="mat-text-warn">local_offer</md-icon>
+                <h4 md-line>Promotions</h4>
+                <p md-line>Etiam Ligula Dapibus</p>
+              </md-list-item>
+              <md-list-item>
+                <md-icon md-list-avatar class="mat-text-accent">info</md-icon>
+                <h4 md-line>Updates</h4>
+                <p md-line>Sollicitudin Euismod Fringilla</p>
+              </md-list-item>
+
+              <md-list-item>
+                <md-icon md-list-avatar class="mat-indigo">delete_sweep</md-icon>
+                <h4 md-line>Removed 6 items from task list</h4>
+                <span class="text-md mat-text-muted" md-line>{{ 1427207139000 | date: 'fullDate' }}</span>
+              </md-list-item>
+              <md-list-item>
+                <md-icon md-list-avatar>check_circle</md-icon>
+                <h4 md-line>Completed 2 projects</h4>
+                <span class="text-md mat-text-muted" md-line>{{ 1427412725000 | date: 'fullDate' }}</span>
+              </md-list-item>
+              <md-list-item>
+                <md-icon md-list-avatar>notifications_paused</md-icon>
+                <h4 md-line>Muted notifications</h4>
+                <span class="text-md mat-text-muted" md-line>{{ 1427546580000 | date: 'fullDate' }}</span>
+              </md-list-item>
+              <md-list-item>
+                <md-icon md-list-avatar>person_add</md-icon>
+                <h4 md-line>Added Joel to contact list</h4>
+                <span class="text-md mat-text-muted" md-line>{{ 1428275520000 | date: 'fullDate' }}</span>
+              </md-list-item>
+              <md-list-item>
+                <md-icon md-list-avatar>phone_missed</md-icon>
+                <h4 md-line>Missed live call from Ellie</h4>
+                <span class="text-md mat-text-muted" md-line>{{ 1428830580000 | date: 'fullDate' }}</span>
+              </md-list-item>
+              <md-list-item>
+                <md-icon md-list-avatar>group_add</md-icon>
+                <h4 md-line>You've been added to HR group</h4>
+                <span class="text-md mat-text-muted" md-line>{{ 1429363920000 | date: 'fullDate' }}</span>
+              </md-list-item>
+            </md-nav-list>
+          </div>
+        </md-tab>
+      </md-tab-group>
+    </md-sidenav>
+    <router-outlet></router-outlet>
+  </md-sidenav-container>-->
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <md-card class="card-widget mat-teal">
+      <div md-card-widget>
+        <div md-card-float-icon>
+          <md-icon>local_offer</md-icon>
+        </div>
+        <div class="pl-0">
+          <h5 md-card-widget-title>103</h5>
+          <p>Campaigns</p>
+        </div>
+      </div>
+    </md-card>
+  </div>
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <md-card class="card-widget mat-purple">
+      <div md-card-widget>
+        <div md-card-float-icon>
+          <md-icon>phone</md-icon>
+        </div>
+        <div class="pl-0">
+          <h5 md-card-widget-title>230</h5>
+          <p>Customers</p>
+        </div>
+      </div>
+    </md-card>
+  </div>
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <md-card class="card-widget mat-red">
+      <div md-card-widget>
+        <div md-card-float-icon>
+          <md-icon>notifications</md-icon>
+        </div>
+        <div class="pl-0">
+          <h5 md-card-widget-title>323</h5>
+          <p>Queries</p>
+        </div>
+      </div>
+    </md-card>
+  </div>
+  <div fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+    <md-card class="card-widget mat-indigo">
+      <div md-card-widget>
+        <div md-card-float-icon>
+          <md-icon>email</md-icon>
+        </div>
+        <div class="pl-0">
+          <h5 md-card-widget-title>870</h5>
+          <p>Opens</p>
+        </div>
+      </div>
+    </md-card>
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutWrap="space-between center">
+	<div fxFlex.gt-sm="33.33%" fxFlex="100">
+		<md-card>
+      <!--<md-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+        Revenue &nbsp; <span class="font-weight-bold mat-text-primary">+458,90</span>
+        <span fxFlex></span>
+        <button md-icon-button md-button-sm [md-menu-trigger-for]="card1" aria-label="Open card menu">
+          <md-icon>more_vert</md-icon>
+        </button>
+      </md-card-subtitle>
+      <md-menu #card1="mdMenu" x-position="before">
+        <button md-menu-item>
+          <md-icon>settings</md-icon>
+          Settings
+        </button>
+        <button md-menu-item>
+          <md-icon>more</md-icon>
+          View More
+        </button>
+        <button md-menu-item>
+          <md-icon>notifications_off</md-icon>
+          Disable notifications
+        </button>
+        <button md-menu-item>
+          <md-icon>exit_to_app</md-icon>
+          Remove Panel
+        </button>
+      </md-menu>
+			<md-card-content>
+        <canvas height="200" baseChart class="chart"
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [colors]="chartColors"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"></canvas>
+      </md-card-content>-->
+		</md-card>
+	</div>
+	<div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="50" fxFlex="100">
+		<md-card>
+      <!--<md-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+        Yearly Sales &nbsp; <span class="font-weight-bold mat-text-warn">-46,68</span>
+        <span fxFlex></span>
+        <button md-icon-button md-button-sm [md-menu-trigger-for]="card2" aria-label="Open card menu">
+          <md-icon>more_vert</md-icon>
+        </button>
+      </md-card-subtitle>
+      <md-menu #card2="mdMenu" x-position="before">
+        <button md-menu-item>
+          <md-icon>settings</md-icon>
+          Settings
+        </button>
+        <button md-menu-item>
+          <md-icon>more</md-icon>
+          View More
+        </button>
+        <button md-menu-item>
+          <md-icon>notifications_off</md-icon>
+          Disable notifications
+        </button>
+        <button md-menu-item>
+          <md-icon>exit_to_app</md-icon>
+          Remove Panel
+        </button>
+      </md-menu>
+			<md-card-content>
+        <canvas height="200" baseChart class="chart"
+          [datasets]="ComboChartData"
+          [labels]="comboChartLabels"
+          [options]="ComboChartOptions"
+          [colors]="chartColors"
+          [legend]="comboChartLegend"
+          [chartType]="barChartType"></canvas>
+      </md-card-content>-->
+		</md-card>
+	</div>
+	<div fxFlex.gt-sm="33.33%" fxFlex.gt-xs="50" fxFlex="100">
+		<md-card>
+      <!--<md-card-subtitle fxLayout="row" fxLayoutAlign="start center">
+        Sales Report &nbsp; <span class="font-weight-bold mat-text-accent">+2,50%</span>
+        <span fxFlex></span>
+        <button md-icon-button md-button-sm [md-menu-trigger-for]="card3" aria-label="Open card menu">
+          <md-icon>more_vert</md-icon>
+        </button>
+      </md-card-subtitle>
+      <md-menu #card3="mdMenu" x-position="before">
+        <button md-menu-item>
+          <md-icon>settings</md-icon>
+          Settings
+        </button>
+        <button md-menu-item>
+          <md-icon>more</md-icon>
+          View More
+        </button>
+        <button md-menu-item>
+          <md-icon>notifications_off</md-icon>
+          Disable notifications
+        </button>
+        <button md-menu-item>
+          <md-icon>exit_to_app</md-icon>
+          Remove Panel
+        </button>
+      </md-menu>
+			<md-card-content>
+        <canvas height="200" baseChart class="chart"
+          [datasets]="bubbleChartData"
+          [labels]="comboChartLabels"
+          [options]="ComboChartOptions"
+          [legend]="comboChartLegend"
+          [chartType]="bubbleChartType"></canvas>
+      </md-card-content>-->
+		</md-card>
+	</div>
+</div>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-sm="66.66%" fxFlex="100">
+    <!--<ngx-datatable
+      class="material"
+      [rows]="rows"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="0"
+      [rowHeight]="'auto'">
+      <ngx-datatable-column name="Project">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['project']}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Due Date">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{row['date'] | date: 'MMMM dd'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Progress">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <md-progress-bar mode="determinate" value="{{row['progress']}}" color="primary"></md-progress-bar>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>-->
+  </div>
+  <div fxFlex.gt-sm="33.33%" fxFlex="100">
+    <md-card>
+      <md-card-title>Newsfeed</md-card-title>
+      <md-card-subtitle>Stories posted today</md-card-subtitle>
+      <hr>
+      <md-list>
+        <ng-template let-item let-last="last" ngFor [ngForOf]="messages">
+          <md-list-item>
+            <img md-list-avatar src="{{item.photo}}" alt="">
+            <h3 md-line> {{item.from}} </h3>
+            <p md-line> {{item.subject}} - {{item.message}} </p>
+          </md-list-item>
+        </ng-template>
+      </md-list>
+    </md-card>
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex.gt-md="50" fxFlex="100">
+    <md-card>
+      <div fxLayout="row" fxLayoutAlign="center center" class="mr-1">
+        <md-card-header class="mt-0">
+          <img md-card-avatar src="assets/images/avatar.jpg">
+          <md-card-subtitle>Revenue &nbsp; <span class="font-weight-bold mat-text-primary">+458,90</span></md-card-subtitle>
+          <md-card-title>Gerald Morris</md-card-title>
+        </md-card-header>
+        <span fxFlex></span>
+        <!--<button md-icon-button md-button-sm [md-menu-trigger-for]="card1" aria-label="Open card menu">
+          <md-icon>more_vert</md-icon>
+        </button>-->
+      </div>
+      <div class="card-image-header" style="background-image: url(assets/images/unsplash/2.jpg); height: 240px;"></div>
+      <md-card-content>
+        <button md-fab md-fab-card-float class="mr-1" color="warn"><md-icon>share</md-icon></button>
+        <p class="ma-0">Phileas Fogg and Aouda went on board, where they found Fix already installed. Below deck was a square cabin, of which the walls bulged out in the form of cots, above a circular divan; in the centre was a table provided with a swinging lamp.</p>
+      </md-card-content>
+      <hr>
+      <md-card-actions>
+        <div fxLayout="row">
+          <button md-icon-button>
+            <md-icon>share</md-icon>
+          </button>
+          <button md-icon-button>
+            <md-icon>favorite</md-icon>
+          </button>
+          <span fxFlex></span>
+          <button md-button>More info</button>
+          <button md-button>Download</button>
+        </div>
+      </md-card-actions>
+    </md-card>
+  </div>
+  <div fxFlex.gt-md="50" fxFlex="100">
+    <md-card>
+      <!--<md-card-content class="pb-0">
+        <div fxLayout="row" fxLayoutAlign="start center" class="mb-2">
+          <div fxFlex>
+            <h3 class="mt-0 mb-0">London, UK</h3>
+            <h6 class="mt-0 mb-0">Saturday 2:00 AM</h6>
+            <p class="mat-text-muted mt-0 mb-0">Mostly Sunny</p>
+          </div>
+          <span fxFlex></span>
+          <div fxFlex class="text-xs-right">
+            <h1 class="text-xxl mt-0 mb-0">
+              <span class="pe-is-w-moon-sea mat-text-accent"></span>
+              <span>6<sup></sup></span>
+            </h1>
+          </div>
+        </div>
+        <div fxLayout="row" layout-align="center" class="mb-2 text-md">
+          <div class="pr-1" fxFlex>
+            <div fxLayout="row">          
+              <span>Pressure</span>
+              <span fxFlex></span>
+              <span>30.09</span>
+              <span>hPa</span>
+            </div>
+
+            <div fxLayout="row">          
+              <span>Visibility</span>
+              <span fxFlex></span>
+              <span>11.27</span>
+              <span>km</span>
+            </div>
+
+            <div fxLayout="row">          
+              <span>Light</span>
+              <span fxFlex></span>
+              <span>0.00</span>
+            </div>
+
+            <div fxLayout="row">          
+              <span>Light</span>
+              <span fxFlex></span>
+              <span>16</span>
+              <span>C</span>
+            </div>
+          </div>
+          <div class="pl-1" fxFlex>
+            <div fxLayout="row">          
+              <span>Humidity</span>
+              <span fxFlex></span>
+              <span>94</span>
+              <span>%</span>
+            </div>
+
+            <div fxLayout="row">          
+              <span>Precp.</span>
+              <span fxFlex></span>
+              <span></span>
+              <span>mm</span>
+            </div>
+
+            <div fxLayout="row">          
+              <span>Snow Depth</span>
+              <span fxFlex></span>
+              <span></span>
+            </div>
+
+            <div fxLayout="row">          
+              <span>Wind Gust</span>
+              <span fxFlex></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </md-card-content>
+      <md-card-content class="mat-indigo">
+        <div fxLayout="row" class="text-xs-center">
+          <div fxFlex>
+            <div class="text-md">6 km/h</div>
+            <div class="text-md pb-xs"><md-icon>call_received</md-icon></div>
+            <div class="text-md">MON</div>
+            <h3 class="block pe-is-w-blizzard mt-0 mb-0 pb-xs"></h3>
+            <strong class="degree-value">10</strong>
+          </div>
+          <div fxFlex>
+            <div class="text-md">6 km/h</div>
+            <div class="text-md pb-xs"><md-icon>call_received</md-icon></div>
+            <div class="text-md">TUE</div>
+            <h2 class="block pe-is-w-eclipse-1 mt-0 mb-0 pb-xs"></h2>
+            <strong class="degree-value">8</strong>
+          </div>
+          <div fxFlex>
+            <div class="text-md">6 km/h</div>
+            <div class="text-md pb-xs"><md-icon>call_made</md-icon></div>
+            <div class="text-md">WED</div>
+            <h2 class="block pe-is-w-fog-3 mt-0 mb-0 pb-xs"></h2>
+            <strong class="degree-value">6</strong>
+          </div>
+          <div fxFlex>
+            <div class="text-md">6 km/h</div>
+            <div class="text-md pb-xs"><md-icon>arrow_upward</md-icon></div>
+            <div class="text-md">THU</div>
+            <h2 class="block pe-is-w-hail-day-2 mt-0 mb-0 pb-xs"></h2>
+            <strong class="degree-value">6</strong>
+          </div>
+          <div fxFlex>
+            <div class="text-md">6 km/h</div>
+            <div class="text-md pb-xs"><md-icon>call_received</md-icon></div>
+            <div class="text-md">FRI</div>
+            <h2 class="block pe-is-w-mix-rainfall-1 mt-0 mb-0 pb-xs"></h2>
+            <strong class="degree-value">9</strong>
+          </div>
+          <div fxFlex>
+            <div class="text-md">6 km/h</div>
+            <div class="text-md pb-xs"><md-icon>arrow_forward</md-icon></div>
+            <div class="text-md">SAT</div>
+            <h2 class="block pe-is-w-moon-sea mt-0 mb-0 pb-xs"></h2>
+            <strong class="degree-value">8</strong>
+          </div>
+        </div>
+      </md-card-content>-->
+      <md-card-content>
+        <button md-fab md-fab-card-float class="mr-1" color="warn"><md-icon>share</md-icon></button>
+        <p class="ma-0">Phileas Fogg and Aouda went on board, where they found Fix already installed. Below deck was a square cabin, of which the walls bulged out in the form of cots, above a circular divan; in the centre was a table provided with a swinging lamp.</p>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

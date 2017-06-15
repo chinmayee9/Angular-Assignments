@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    
+      <h1>{{ title }}</h1>
+      <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
+        <fieldset ngModelGroup="login">
+          username: 
+          <input type="text" ngModel name="username" #usernameRef = "ngModel"
+            required minlength="5">
+          <!--{{ username }}-->
+          <hr>
+          <!--{{ usernameRef.errors | json }}-->
+          <!--<div *ngIf="usernameRef.errors?.required">This field is required</div>
+          <div *ngIf="usernameRef.errors?.minlength"
+            >Minimum length reuired is {{ usernameRef.errors?.minlength.requiredLength }}.
+            You have entered only {{ usernameRef.errors?.minlength.actualLength }}.</div>
+          <br>-->
+          password: 
+          <input type="password" ngModel name="password" #passwordRef = "ngModel"
+            required>
+          <!--<div *ngIf="passwordRef.errors?.required">This field is required</div>-->
+          <hr>
+          Select an option:
+          <div *ngFor="let a of radioOptions">{{ a }}
+            <input type="radio" ngModel name="opt" [value]="a" required>
+          </div> 
+          <hr>
+          Select an option:
+          <select name="drop" [ngModel] = dropOptions[0]>
+            <option *ngFor="let a of dropOptions" [value]="a"> {{ a }}</option>
+          </select>
+        </fieldset>
+        <br>
+        <button type="submit">Submit</button>
+      </form>
+      <br>
+      {{ formRef.value | json }}
+      <!--{{ formRef.errors | json }}
+      {{ formRef.valid | json }}-->
+    
+  </div>
+</div>

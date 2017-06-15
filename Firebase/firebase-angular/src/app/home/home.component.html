@@ -1,0 +1,15 @@
+<h2>All Lessons</h2>
+<h4>Total Lessons: {{ filtered?.length }}</h4>
+<input type="text" placeholder="Description" #insert>
+<button (click)="lessonPush(insert.value)">Insert Lesson at the end</button>
+<br>
+<br>
+<input type="text" placeholder="Description" #update>
+<button (click)="lessonUpdate(update.value)">Update first Lesson</button>
+<br>
+<br>
+<button (click)="lessonDelete()">Delete first Lesson</button>
+<input class="search-bar" placeholder="Search" (keyup)="onSearch(input.value)" #input>
+<div class="lessons-list-container v-h-center-block-parent">
+  <app-lessons-list [lessonsList]="filtered"></app-lessons-list>
+</div>

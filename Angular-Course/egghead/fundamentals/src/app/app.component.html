@@ -1,0 +1,16 @@
+<!--<div>
+  <app-simple-form></app-simple-form>
+  <br>
+  {{ mail.message }}
+  <hr>
+  {{ api }}
+</div>-->
+
+<!--<ul>
+  <li *ngFor="let m of mail.message">{{ m }}</li>
+</ul>-->
+
+<app-simple-form 
+  *ngFor="let m of mail.message"
+  [msg] = "m">
+</app-simple-form>
