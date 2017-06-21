@@ -17,13 +17,22 @@ import {AngularFireAuthModule} from "angularfire2/auth";
 import { HomeComponent } from './home/home.component';
 
 import { LessonsService } from './shared/models/lessons.service';
+import { CoursesService } from './shared/models/courses.service';
 import { LessonsListComponent } from './lessons-list/lessons-list.component'
+
+import { RouterModule } from '@angular/router';
+import { CoursesComponent } from './courses/courses.component';
+import { TopMenuComponent } from './top-menu/top-menu.component';
+import { CourseDetailComponent } from './course-detail/course-detail.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LessonsListComponent
+    LessonsListComponent,
+    CoursesComponent,
+    TopMenuComponent,
+    CourseDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -31,9 +40,37 @@ import { LessonsListComponent } from './lessons-list/lessons-list.component'
       AngularFireDatabaseModule,
       AngularFireAuthModule,
       ReactiveFormsModule,
-      HttpModule
+      HttpModule,
+      RouterModule.forRoot([
+        {
+          path: 'home',
+          component: HomeComponent
+        },
+        {
+          path: 'courses',
+          children: [
+            {
+              path: ':id',
+              component: CourseDetailComponent
+            },
+            {
+              path: '',
+              component: CoursesComponent
+            }
+          ]
+        },
+        {
+          path: '',
+          redirectTo: 'home',
+          pathMatch: 'full'
+        },
+        {
+          path: '**',
+          redirectTo: 'home'
+        }
+      ])
   ],
-  providers: [LessonsService],
+  providers: [LessonsService, CoursesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

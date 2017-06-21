@@ -9,6 +9,7 @@ export class LessonsService {
   constructor(private af: AngularFireDatabase) { }
 
   findAllLessons(): Observable<Lesson[]> {
-    return this.af.list('lessons');
+    return this.af.list('lessons')
+      .map(Lesson.fromJsonList);
    }
 }

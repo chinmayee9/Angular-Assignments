@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Lesson } from '../shared/models/Lesson'
 
 @Component({
@@ -10,6 +10,9 @@ export class LessonsListComponent implements OnInit {
 
   @Input()
   lessonsList: Lesson[];
+
+  @Output('lesson')
+  lessonEmitter = new EventEmitter<Lesson>();
 
   constructor() { }
 
